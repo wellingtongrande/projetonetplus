@@ -2,6 +2,7 @@ package br.com.netplus.app.services;
 
 import br.com.netplus.app.domain.Categoria;
 import br.com.netplus.app.repositories.CategoriaRepository;
+import br.com.netplus.app.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ public class CategoriaService {
 
     public Categoria buscar(Integer id) {
         Optional<Categoria> obj = repo.findById(id);
-        return obj.orElse(null);
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado id: "+id+ ", tipo: "+Categoria.class.getName()));
     }
 
 }
