@@ -1,5 +1,6 @@
 package br.com.netplus.app.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.aspectj.apache.bcel.generic.InstructionConstants;
 
 import javax.persistence.*;
@@ -19,6 +20,7 @@ public class Endereco implements Serializable {
     private String bairro;
     private String cep;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
