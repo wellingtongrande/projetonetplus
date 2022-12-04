@@ -2,8 +2,10 @@ package br.com.netplus.app.services;
 
 import br.com.netplus.app.domain.Categoria;
 import br.com.netplus.app.repositories.CategoriaRepository;
+import br.com.netplus.app.services.exception.DataIntegrityException;
 import br.com.netplus.app.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -27,6 +29,15 @@ public class CategoriaService {
     public Categoria update(Categoria obj){
         find(obj.getId());
         return repo.save(obj);
+    }
+
+    public void delete(Integer id){
+        find(id);
+        try {
+            repo.deleteById(id);
+        }catch (DataIntegrityViolationException e){
+            throw new DataIntegrityException("Näo é possível deletar uma categoria que tenha produtos!");
+        }
     }
 
 }

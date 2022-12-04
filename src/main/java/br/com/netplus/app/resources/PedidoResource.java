@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
-
 @RestController
 @RequestMapping(value = "/pedidos")
 public class PedidoResource {
@@ -23,6 +21,5 @@ public class PedidoResource {
     public ResponseEntity<Pedido> find(@PathVariable Integer id){
         Pedido obj = service.find(id);
         return  ResponseEntity.ok().body(obj);
-
     }
 }
