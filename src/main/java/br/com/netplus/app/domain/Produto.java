@@ -27,6 +27,17 @@ public class Produto implements Serializable {
     )
     private List<Categoria> categorias = new ArrayList<>();
 
+    @OneToMany(mappedBy = "id.produto")
+    private List<ItemPedido> itens = new ArrayList<>();
+
+    private List<Pedido> getPedidos(){
+        List<Pedido> lista = new ArrayList<>();
+        for(ItemPedido x : itens){
+            lista.add(x.getPedido());
+        }
+        return lista;
+    }
+
     public  Produto(){
     }
 
@@ -66,6 +77,13 @@ public class Produto implements Serializable {
 
     public void setPreco(Double preco) {
         this.preco = preco;
+    }
+    public List<ItemPedido> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<ItemPedido> itens) {
+        this.itens = itens;
     }
 
     @Override

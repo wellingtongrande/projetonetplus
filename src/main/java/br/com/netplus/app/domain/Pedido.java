@@ -2,7 +2,9 @@ package br.com.netplus.app.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -20,6 +22,9 @@ public class Pedido implements Serializable {
     @ManyToOne
     @JoinColumn(name= "endereco_de_entrega_id")
     private Endereco enderecoDeEntrega;
+
+    @OneToMany(mappedBy = "id.pedido")
+    private List<ItemPedido> itens = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name="cliente_id")
@@ -72,6 +77,14 @@ public class Pedido implements Serializable {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public List<ItemPedido> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<ItemPedido> itens) {
+        this.itens = itens;
     }
 
     @Override
