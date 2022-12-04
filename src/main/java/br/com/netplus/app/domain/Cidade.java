@@ -1,6 +1,5 @@
 package br.com.netplus.app.domain;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,7 +15,7 @@ public class Cidade implements Serializable {
     @Column(length = 120)
     private String nome;
 
-    @JsonManagedReference
+
     @ManyToOne
     @JoinColumn(name = "estado_id")
     private Estado estado;
