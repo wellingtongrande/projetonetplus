@@ -1,6 +1,7 @@
 package br.com.netplus.app;
 
 import br.com.netplus.app.domain.*;
+import br.com.netplus.app.domain.enums.EstadoPagamento;
 import br.com.netplus.app.domain.enums.TipoCliente;
 import br.com.netplus.app.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 @SpringBootApplication
@@ -34,6 +36,12 @@ public class NetplusApplication implements CommandLineRunner {
 
     @Autowired
     private EnderecoRepository enderecoRepository;
+
+    @Autowired
+    private PedidoRepository pedidoRepository;
+
+    @Autowired
+    private PagamentoRepository pagamentoRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -84,6 +92,22 @@ public class NetplusApplication implements CommandLineRunner {
 
         clienteRepository.saveAll(Arrays.asList(cli1, cli2));
         enderecoRepository.saveAll(Arrays.asList(e1,e2,e3));
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+        Pedido ped1 = new Pedido(null, sdf.parse("30/09/2019 10:32"), cli1, e1);
+        Pedido ped2 = new Pedido(null, sdf.parse("23/02/2022 12:55"),  cli1, e2);
+
+        Pagamento pag1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6);
+        ped1.setPagamento(pag1);
+
+        Pagamento pag2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("30/09/2019 10:32"), null);
+        ped2.setPagamento(pag2);
+
+        cli1.getPedidos().addAll(Arrays.asList(ped1,ped2));
+
+        pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
+        pagamentoRepository.saveAll(Arrays.asList(pag1,pag2));
 
     }
 }
