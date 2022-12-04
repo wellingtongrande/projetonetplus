@@ -21,5 +21,4 @@ public class ClienteResource {
         Cliente obj = service.buscar(id);
         return ResponseEntity.ok().body(obj);
     }
-
 }

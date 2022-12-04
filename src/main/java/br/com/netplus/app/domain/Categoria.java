@@ -15,6 +15,7 @@ public class Categoria implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
+    @Column(length = 80)
     private String nome;
 
     @JsonManagedReference

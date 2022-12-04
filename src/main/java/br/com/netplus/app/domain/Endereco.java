@@ -14,10 +14,15 @@ public class Endereco implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
+    @Column(length = 120)
     private String logradouro;
+    @Column(length = 10)
     private String numero;
+    @Column(length = 120)
     private String complemento;
+    @Column(length = 120)
     private String bairro;
+    @Column(length = 12)
     private String cep;
 
     @JsonBackReference

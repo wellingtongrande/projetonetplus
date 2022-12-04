@@ -15,6 +15,7 @@ public class Estado implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
+    @Column(length = 20)
     private String nome;
 
     @JsonBackReference

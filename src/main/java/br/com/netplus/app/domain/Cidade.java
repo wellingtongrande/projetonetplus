@@ -13,6 +13,7 @@ public class Cidade implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
+    @Column(length = 120)
     private String nome;
 
     @JsonManagedReference

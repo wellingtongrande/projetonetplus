@@ -1,6 +1,7 @@
 package br.com.netplus.app.domain;
 
 import br.com.netplus.app.domain.enums.TipoCliente;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -14,8 +15,11 @@ public class Cliente implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
+    @Column(length = 90)
     private String nome;
+    @Column(length = 90)
     private String email;
+    @Column(length = 20)
     private String cpfOuCnpj;
     private Integer tipo;
 
@@ -25,8 +29,10 @@ public class Cliente implements Serializable {
 
     @ElementCollection
     @CollectionTable(name = "telefone")
+    @Column(length = 16)
     private Set<String> telefones = new HashSet<>();
 
+    @JsonBackReference
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<>();
 
