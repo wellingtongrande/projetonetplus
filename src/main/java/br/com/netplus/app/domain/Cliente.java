@@ -21,6 +21,7 @@ public class Cliente implements Serializable {
     @Column(length = 20)
     private String cpfOuCnpj;
     private Integer tipo;
+    private Integer idPatrocinador;
 
 
     @OneToMany(mappedBy = "cliente")

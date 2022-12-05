@@ -4,6 +4,7 @@ import br.com.netplus.app.domain.Categoria;
 import br.com.netplus.app.domain.Cliente;
 import br.com.netplus.app.dto.CategoriaDTO;
 import br.com.netplus.app.dto.ClienteDTO;
+import br.com.netplus.app.dto.ClienteNewDTO;
 import br.com.netplus.app.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,9 +31,9 @@ public class ClienteResource {
     }
 
     @RequestMapping(method=RequestMethod.POST)
-    public ResponseEntity<Void> insert(@Valid @RequestBody ClienteDTO objDto) {
+    public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto) {
         Cliente obj = service.fromDTO(objDto);
-       // obj = service.insert(obj);
+        obj = service.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
