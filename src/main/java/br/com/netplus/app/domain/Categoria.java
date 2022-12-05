@@ -2,6 +2,7 @@ package br.com.netplus.app.domain;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ public class Categoria implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
+
     @Column(length = 80)
     private String nome;
 

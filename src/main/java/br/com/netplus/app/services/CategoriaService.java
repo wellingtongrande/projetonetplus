@@ -1,6 +1,7 @@
 package br.com.netplus.app.services;
 
 import br.com.netplus.app.domain.Categoria;
+import br.com.netplus.app.dto.CategoriaDTO;
 import br.com.netplus.app.repositories.CategoriaRepository;
 import br.com.netplus.app.services.exception.DataIntegrityException;
 import br.com.netplus.app.services.exception.ObjectNotFoundException;
@@ -51,5 +52,9 @@ public class CategoriaService {
     public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
         return repo.findAll(pageRequest);
+    }
+
+    public Categoria fromDTO(CategoriaDTO objDto) {
+        return new Categoria(objDto.getId(), objDto.getNome());
     }
 }
