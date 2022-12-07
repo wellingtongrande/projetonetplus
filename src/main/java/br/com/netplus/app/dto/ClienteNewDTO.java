@@ -1,7 +1,10 @@
 package br.com.netplus.app.dto;
 
+import br.com.netplus.app.services.validation.ClienteInsert;
+
 import java.io.Serializable;
 
+@ClienteInsert
 public class ClienteNewDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
