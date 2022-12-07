@@ -90,6 +90,14 @@ public class Pedido implements Serializable {
     public void setItens(List<ItemPedido> itens) {
         this.itens = itens;
     }
+    
+    public double getValorTotal() {
+        double soma = 0.0;
+        for (ItemPedido ip : itens) {
+            soma = soma + ip.getSubTotal();
+        }
+        return soma;
+    }
 
     @Override
     public boolean equals(Object o) {
