@@ -1,27 +1,39 @@
 package br.com.netplus.app.domain;
 
-import br.com.netplus.app.domain.enums.EstadoPagamento;
-import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.util.Date;
 
 import javax.persistence.Entity;
-import java.util.Date;
+
+import br.com.netplus.app.domain.enums.EstadoPagamento;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
 @Entity
+@JsonTypeName("pagamentoComBoleto")
 public class PagamentoComBoleto extends Pagamento {
     private static final long serialVersionUID = 1L;
 
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private Date dataPagamento;
-
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern="dd/MM/yyyy")
     private Date dataVencimento;
 
-    private PagamentoComBoleto(){
+    @JsonFormat(pattern="dd/MM/yyyy")
+    private Date dataPagamento;
 
+    public PagamentoComBoleto() {
     }
 
-    public PagamentoComBoleto(Integer id, EstadoPagamento estado, Pedido pedido,  Date dataVencimento, Date dataPagamento) {
+    public PagamentoComBoleto(Integer id, EstadoPagamento estado, Pedido pedido, Date dataVencimento, Date dataPagamento) {
         super(id, estado, pedido);
         this.dataPagamento = dataPagamento;
+        this.dataVencimento = dataVencimento;
+    }
+
+    public Date getDataVencimento() {
+        return dataVencimento;
+    }
+
+    public void setDataVencimento(Date dataVencimento) {
         this.dataVencimento = dataVencimento;
     }
 
@@ -33,11 +45,4 @@ public class PagamentoComBoleto extends Pagamento {
         this.dataPagamento = dataPagamento;
     }
 
-    public Date getDataVencimento() {
-        return dataVencimento;
-    }
-
-    public void setDataVencimento(Date dataVencimento) {
-        this.dataVencimento = dataVencimento;
-    }
 }
