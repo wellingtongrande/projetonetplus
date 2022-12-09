@@ -1,6 +1,5 @@
 package br.com.netplus.app.domain;
 
-
 import javax.persistence.Entity;
 
 import br.com.netplus.app.domain.enums.EstadoPagamento;
@@ -9,24 +8,26 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @Entity
 @JsonTypeName("pagamentoComCartao")
 public class PagamentoComCartao extends Pagamento {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private Integer numeroDeParcelas;
+	private Integer numeroDeParcelas;
+	
+	public PagamentoComCartao() {
+	}
 
-    public PagamentoComCartao() {
-    }
+	public PagamentoComCartao(Integer id, EstadoPagamento estado, Pedido pedido, Integer numeroDeParcelas) {
+		super(id, estado, pedido);
+		this.numeroDeParcelas = numeroDeParcelas;
+	}
 
-    public PagamentoComCartao(Integer id, EstadoPagamento estado, Pedido pedido, Integer numeroDeParcelas) {
-        super(id, estado, pedido);
-        this.numeroDeParcelas = numeroDeParcelas;
-    }
+	public Integer getNumeroDeParcelas() {
+		return numeroDeParcelas;
+	}
 
-    public Integer getNumeroDeParcelas() {
-        return numeroDeParcelas;
-    }
-
-    public void setNumeroDeParcelas(Integer numeroDeParcelas) {
-        this.numeroDeParcelas = numeroDeParcelas;
-    }
-
+	public void setNumeroDeParcelas(Integer numeroDeParcelas) {
+		this.numeroDeParcelas = numeroDeParcelas;
+	}
+	
+	
+		
 }
